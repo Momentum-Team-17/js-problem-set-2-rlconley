@@ -5,43 +5,80 @@
 // If the potential member is not in the array, return the array unchanged.
 // If the potential member is in the array, remove all instances of it from the array.
 function remove(array, potentialMember) {
-  // currently does not work for multiple occurences of the potential member in the array
-  let arrayCopy = array.slice();
-  // make a copy of the array before we mess with it
-  let index = array.indexOf(potentialMember);
-  // find location of potential member
-  console.log(index);
-  if (index >= 0) {
-    // if the index is -1, the element is not in the array and we skip to line 22, otherwise, splice will work as anticipated
-    for (let i = 0; i < array.length; i++) {
-      if (arrayCopy[i] === potentialMember) {
-        arrayCopy.splice(i, 1);
-        i--;
-        // we need this line because if we remove an item from the array, we need to adjust the index to account for
-        //   Example: let array = ['A', 'B', 'C', 'D']
-        //   if we splice the array and remove the 'C' from position 2,
-        //   then 'D' would then be in position 2 and we would need to check position 2 again
-      }
+  // currently does not work for multiple occurrences of the potential member in the array
+  let newArray = [];
+  // make an empty array
+  for (let person of array) {
+    // console.log(`person = ${person}`);
+    // if person does not match the potentialMember then push them into the new array
+    if (person !== potentialMember) {
+      newArray.push(person);
     }
-    // remove the member from the copy
-    return arrayCopy;
-    // return the copied array with the member removed
-  } else {
-    return arrayCopy;
-    // if element is not in array, return the copy with no modifications
   }
+  //   console.log(newArray);
+  return newArray;
 }
+
 // 2. Revisit your "remove" function. Make sure that it does not change the original
 // array but instead returns a new array.
 
 // 3. Create a function called "sum" that takes an array of numbers and
 // returns the sum of those numbers.
+// example [1, 2, 3, 4]
+function sum(numArray) {
+  let sum = 0;
+  for (let number of numArray) {
+    // console.log(`number: ${number}`);
+    // this is a template literal
+    sum += number;
+    // this is the same as sum = sum + number
+    // console.log(`sum: ${sum}`);
+  }
+  return sum;
+}
 
 // 4. Create a function called "average" that takes an array of numbers
 // and returns the average of those numbers.
+function average(numArray) {
+  let average;
+  // average starts off as undefined
+  if (numArray.length > 0) {
+    // only do the calculation if the array is not empty
+    average = sum(numArray) / numArray.length;
+    // reassign average after calculated
+  }
+  return average;
+}
 
 // 5. Create a function called "minimum" that takes an array of numbers and
 // returns the smallest number in that array.
+// example [3, 6, 5, 10, 1, 2, 1, 0]
+function minimum(numArray) {
+  // declares and names the function, lists parameter(s)
+  let minimum;
+  // declare the variable, starts at undefined
+  if (numArray.length > 0) {
+    // conditional, if there is anything in the array, else go to line 78
+    minimum = numArray[0];
+    // give the minimum a starting point as first number in array
+    console.log(`starting minimum: ${minimum}`);
+    for (let number of numArray) {
+      // for ... of loop
+      console.log(`current number: ${number}`);
+      if (number < minimum) {
+        // conditional, check if the number is smaller than minimum
+        minimum = number;
+        // if so, redefine minimum
+        console.log(`new minimum: ${minimum}`);
+      }
+      // close conditional line 68 here
+    }
+    // closes for of loop
+  }
+  // closes conditional line 60
+  return minimum;
+}
+// closes function
 
 // 6. There are many techniques to sort arrays in programming. Your programming
 // language will likely include the ability to do this. We are going to
