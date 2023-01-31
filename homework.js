@@ -2,10 +2,35 @@
 // member of the array, and returns a new array with that member removed.
 // For example, `remove(['Cadence', 'Ordel', 'Marion'], 'Marion')` results
 // in `['Cadence', 'Ordel']`.
-//
 // If the potential member is not in the array, return the array unchanged.
 // If the potential member is in the array, remove all instances of it from the array.
-
+function remove(array, potentialMember) {
+  // currently does not work for multiple occurences of the potential member in the array
+  let arrayCopy = array.slice();
+  // make a copy of the array before we mess with it
+  let index = array.indexOf(potentialMember);
+  // find location of potential member
+  console.log(index);
+  if (index >= 0) {
+    // if the index is -1, the element is not in the array and we skip to line 22, otherwise, splice will work as anticipated
+    for (let i = 0; i < array.length; i++) {
+      if (arrayCopy[i] === potentialMember) {
+        arrayCopy.splice(i, 1);
+        i--;
+        // we need this line because if we remove an item from the array, we need to adjust the index to account for
+        //   Example: let array = ['A', 'B', 'C', 'D']
+        //   if we splice the array and remove the 'C' from position 2,
+        //   then 'D' would then be in position 2 and we would need to check position 2 again
+      }
+    }
+    // remove the member from the copy
+    return arrayCopy;
+    // return the copied array with the member removed
+  } else {
+    return arrayCopy;
+    // if element is not in array, return the copy with no modifications
+  }
+}
 // 2. Revisit your "remove" function. Make sure that it does not change the original
 // array but instead returns a new array.
 
